@@ -44,18 +44,18 @@
 #
 # print(calculate_average([20, 25, 30, 35, 40]))
 
-def filter_invalid_readings(lower, upper, readings):
-    invalid_readings = []
-
-    for x in readings:
-        if not lower < x < upper:
-            invalid_readings.append(x)
-
-    valid_readings = [x for x in readings if lower < x < upper]
-
-    return invalid_readings, valid_readings
-
-print(filter_invalid_readings(10, 40, [5, 12, 25, 41, 38, 8, 45]))
+# def filter_invalid_readings(lower, upper, readings):
+#     invalid_readings = []
+#
+#     for x in readings:
+#         if not lower < x < upper:
+#             invalid_readings.append(x)
+#
+#     valid_readings = [x for x in readings if lower < x < upper]
+#
+#     return invalid_readings, valid_readings
+#
+# print(filter_invalid_readings(10, 40, [5, 12, 25, 41, 38, 8, 45]))
 
 # def get_hot_sensor(sensor_data):
 #     for x in sensor_data:
@@ -75,34 +75,69 @@ print(filter_invalid_readings(10, 40, [5, 12, 25, 41, 38, 8, 45]))
 # print(first, last, middle)
 
 # understand and fix
-def generate_error_report(events, ignored_codes=[]):
+# def generate_error_report(events, ignored_codes=[]):
+#
+#     report = {}
+#
+#     for event in events:
+#         try:
+#             code = event["error_code"]
+#             message = event["message"]
+#
+#             if code in ignored_codes:
+#                 continue
+#
+#             if code not in report:
+#                 report[code] = []
+#
+#             report[code].append(message)
+#
+#         except:
+#             pass
+#
+#     for code in report:
+#         report[code] = list(set(report[code]))
+#
+#     return report
+#
+#
+# def print_report(report):
+#
+#     for code in report:
+#         print("Error Code: " + code)
+#         print("Messages: " + str(report[code]))
 
-    report = {}
 
-    for event in events:
-        try:
-            code = event["error_code"]
-            message = event["message"]
+def anomalous_readings(reading):
 
-            if code in ignored_codes:
-                continue
+    sensor_dict = {}
+    for sensor in reading:
+        sensor_id = sensor["sensor_id"]
+        temperature = sensor["temperature"]
+        if sensor_id not in sensor_dict:
+            sensor_dict[sensor_id] =  {
+                "total" : temperature,
+                "count" : 1
+            }
+        else:
+            sensor_dict[sensor_id]["total"] += temperature
+            sensor_dict[sensor_id]["count"] += 1
 
-            if code not in report:
-                report[code] = []
+    anomaly = []
+    for sensor in sensor_dict:
+        sensor_dict[sensor]["total"] = sensor_dict[sensor]["total"] / sensor_dict[sensor]["count"]
+        if sensor_dict[sensor]["total"] > 40:
+            anomaly.append(sensor)
 
-            report[code].append(message)
+    return anomaly
 
-        except:
-            pass
-
-    for code in report:
-        report[code] = list(set(report[code]))
-
-    return report
-
-
-def print_report(report):
-
-    for code in report:
-        print("Error Code: " + code)
-        print("Messages: " + str(report[code]))
+print(anomalous_readings([
+    {"sensor_id": "A", "temperature": 21},
+    {"sensor_id": "B", "temperature": 24},
+    {"sensor_id": "A", "temperature": 22},
+    {"sensor_id": "C", "temperature": 65},
+    {"sensor_id": "B", "temperature": 25},
+    {"sensor_id": "A", "temperature": 23},
+    {"sensor_id": "C", "temperature": 67},
+    {"sensor_id": "B", "temperature": 24},
+]))
