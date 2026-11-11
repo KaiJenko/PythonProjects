@@ -108,36 +108,91 @@
 #         print("Messages: " + str(report[code]))
 
 
-def anomalous_readings(reading):
+# def anomalous_readings(reading):
+#
+#     sensor_dict = {}
+#     for sensor in reading:
+#         sensor_id = sensor["sensor_id"]
+#         temperature = sensor["temperature"]
+#         if sensor_id not in sensor_dict:
+#             sensor_dict[sensor_id] =  {
+#                 "total" : temperature,
+#                 "count" : 1
+#             }
+#         else:
+#             sensor_dict[sensor_id]["total"] += temperature
+#             sensor_dict[sensor_id]["count"] += 1
+#
+#     anomaly = []
+#     for sensor in sensor_dict:
+#         sensor_dict[sensor]["total"] = sensor_dict[sensor]["total"] / sensor_dict[sensor]["count"]
+#         if sensor_dict[sensor]["total"] > 40:
+#             anomaly.append(sensor)
+#
+#     return anomaly
+#
+# print(anomalous_readings([
+#     {"sensor_id": "A", "temperature": 21},
+#     {"sensor_id": "B", "temperature": 24},
+#     {"sensor_id": "A", "temperature": 22},
+#     {"sensor_id": "C", "temperature": 65},
+#     {"sensor_id": "B", "temperature": 25},
+#     {"sensor_id": "A", "temperature": 23},
+#     {"sensor_id": "C", "temperature": 67},
+#     {"sensor_id": "B", "temperature": 24},
+# ]))
 
-    sensor_dict = {}
-    for sensor in reading:
-        sensor_id = sensor["sensor_id"]
-        temperature = sensor["temperature"]
-        if sensor_id not in sensor_dict:
-            sensor_dict[sensor_id] =  {
-                "total" : temperature,
-                "count" : 1
-            }
-        else:
-            sensor_dict[sensor_id]["total"] += temperature
-            sensor_dict[sensor_id]["count"] += 1
 
-    anomaly = []
-    for sensor in sensor_dict:
-        sensor_dict[sensor]["total"] = sensor_dict[sensor]["total"] / sensor_dict[sensor]["count"]
-        if sensor_dict[sensor]["total"] > 40:
-            anomaly.append(sensor)
+# def getRemovableIndices(str1, str2):
+#     # Write your code here
+#     removable_char = []
+#     for index, char in enumerate(str1):
+#         string_slice = str1[:index] + str1[index+1:]
+#         print(string_slice)
+#         if string_slice == str2:
+#             removable_char.append(index)
+#
+#     return removable_char
+#
+# print(getRemovableIndices("aabbb", "aabb"))
 
-    return anomaly
 
-print(anomalous_readings([
-    {"sensor_id": "A", "temperature": 21},
-    {"sensor_id": "B", "temperature": 24},
-    {"sensor_id": "A", "temperature": 22},
-    {"sensor_id": "C", "temperature": 65},
-    {"sensor_id": "B", "temperature": 25},
-    {"sensor_id": "A", "temperature": 23},
-    {"sensor_id": "C", "temperature": 67},
-    {"sensor_id": "B", "temperature": 24},
-]))
+
+class Event:
+    def __init__(self, event_id, name, capacity):
+        self.event_id = event_id
+        self.name = name
+        self.capacity = capacity
+        self.bookings = []
+
+
+class Booking:
+    def __init__(self, customer_id, event_id, tickets):
+        self.customer_id = customer_id
+        self.event_id = event_id
+        self.tickets = tickets
+
+
+class BookingSystem:
+    def __init__(self):
+        self.events = []
+        self.bookings = []
+
+    def add_event(self, event):
+        self.events.append(event)
+
+    def add_booking(self, booking):
+        self.bookings.append(booking)
+
+    def get_event(self, event_id):
+        for event in self.events:
+            if event.event_id == event_id:
+                return event
+
+        return None
+
+    #
+
+    def book_tickets(self, customer_id, event_id, tickets):
+        pass
+
