@@ -59,6 +59,8 @@ def customers(transactions):
     for x in range(2):
         highest_spenders.append(heapq.heappop_max(sorted_transactions))
 
+    return highest_spenders
+
 print(customers([
     {"customer": "A", "amount": 50},
     {"customer": "B", "amount": 100},
