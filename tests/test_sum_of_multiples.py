@@ -1,6 +1,6 @@
 import unittest
 
-from exercises.sum_of_multiples import (
+from exercises.Exercism.sum_of_multiples import (
 
     sum_of_multiples,
 

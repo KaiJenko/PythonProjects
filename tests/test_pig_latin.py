@@ -1,6 +1,6 @@
 import unittest
 
-from exercises.pig_latin import (
+from exercises.Exercism.pig_latin import (
 
     translate,
 

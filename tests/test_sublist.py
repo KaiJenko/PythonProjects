@@ -1,6 +1,6 @@
 import unittest
 
-from exercises.sublist import (
+from exercises.Exercism.sublist import (
 
     sublist,
 

@@ -2,7 +2,7 @@ from datetime import datetime
 
 import unittest
 
-from exercises.gigasecond import (
+from exercises.Exercism.gigasecond import (
 
     add,
 

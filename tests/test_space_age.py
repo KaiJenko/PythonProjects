@@ -1,6 +1,6 @@
 import unittest
 
-from exercises.space_age import (
+from exercises.Exercism.space_age import (
 
     SpaceAge,
 
