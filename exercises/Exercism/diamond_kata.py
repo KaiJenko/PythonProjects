@@ -32,7 +32,7 @@ def rows(letter):
                 else:
                     row.append(".")
 
-        print("".join(row))
+        array.append("".join(row))
     return array
 
 print(rows("E"))
