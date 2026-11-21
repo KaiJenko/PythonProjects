@@ -1,13 +1,9 @@
+
+
 # If you know the person's name (e.g. if they're named Do-yun), then you will say:
 # One for Kai, one for me.
 # If you don't know the person's name, you will say you instead.
 # One for you, one for me.
-from idlelib.pyshell import use_subprocess
-from operator import index
-
-from exercises.bug_hunts.bug_hunt_2 import total
-from exercises.bug_hunts.bug_hunt_4 import print_display_names
-
 
 # def two_fer(name=""):
 #
@@ -224,18 +220,30 @@ from exercises.bug_hunts.bug_hunt_4 import print_display_names
 #input: list of integers, and a target integer
 #output: the index of two numbers that add up to target
 
-# def number_target(numbers, target):
-#
-#     for i, num in enumerate(numbers):
-#
-#         for j in range(i + 1, len(numbers)):
-#
-#             if num + numbers[j] == target:
-#                 return [i, j]
-#
-#     return False
-#
-# print(number_target([2,7,11,15], 22))
+def number_target(numbers, target):
+
+    for i, num in enumerate(numbers):
+
+        for j in range(i + 1, len(numbers)):
+
+            if num + numbers[j] == target:
+                return [i, j]
+
+    return False
+
+print(number_target([2,7,11,15], 22))
+
+def rotate_list(numbers, rotation):
+
+
+    if rotation > len(numbers):
+        rotation = rotation % len(numbers)
+
+    rotated = numbers[-rotation:] + numbers[:-rotation]   #  2: everything from index two on, -2 last two elements
+
+    return rotated
+
+print(rotate_list([1, 2, 3, 4, 5], 1))
 
 #input: list of integers
 #output: a list of numbers appearing more than once
@@ -277,20 +285,83 @@ from exercises.bug_hunts.bug_hunt_4 import print_display_names
 #input: list of integers, with all numbers occurring three times bar one
 #output: integer which appears once
 
-def individual(numbers):
+# def individual(numbers):
+#
+#     number_dict = {}
+#
+#     for num in numbers:
+#         if num not in number_dict:
+#             number_dict[num] = 1
+#         else:
+#             number_dict[num] += 1
+#
+#     for number, count in number_dict.items():
+#         if count == 1:
+#             return number
+#
+#     return None
+#
+# print(individual([0, 1, 0, 1, 0, 1, 99]))
 
-    number_dict = {}
+#input: list of integers, rotation amount
+#output: list that has been rotated
+#constraints:
+
+# def rotate_list(numbers, rotation):
+#
+#
+#     if rotation > len(numbers):
+#         rotation = rotation % len(numbers)
+#
+#     rotated = numbers[-rotation:] + numbers[:-rotation]   #  2: everything from index two on, -2 last two elements
+#
+#     return rotated
+#
+# print(rotate_list([1, 2, 3, 4, 5], 1))
+
+#input; list of integers
+#output: integer which appears only once
+#only one element will appear once
+
+# def lonely_integer(numbers):
+#
+#     count_numbers = {}
+#
+#     for num in numbers:
+#         if num not in count_numbers:
+#             count_numbers[num] = 1
+#         else:
+#             count_numbers[num] += 1
+#
+#     for number, count in count_numbers.items():
+#         if count == 1:
+#             return number
+#
+#     return None
+#
+# print(lonely_integer([1, 2, 3, 4, 3, 2, 1]))
+
+#input: list of integers
+#output: num which appears odd amount of times
+#constraints: only one num, if no num, return none
+
+def odd_integer(numbers):
+
+    count_numbers = {}
 
     for num in numbers:
-        if num not in number_dict:
-            number_dict[num] = 1
+        if num not in count_numbers:
+            count_numbers[num] = 1
         else:
-            number_dict[num] += 1
+            count_numbers[num] += 1
 
-    for number, count in number_dict.items():
-        if count == 1:
+    for number, count in count_numbers.items():
+        if count % 2 != 0:
             return number
-
     return None
 
-print(individual([0, 1, 0, 1, 0, 1, 99]))
+
+print(odd_integer([4, 3, 4, 3, 4, 5, 5, 4]))
+
+
+
